@@ -1,0 +1,307 @@
+{% extends "master.html" %}
+{% load static %}
+
+
+{% block title %}
+    Alfalasi - Faqs & Library
+{% endblock title %}
+
+
+{% block content %}
+
+<style>
+    .service-card {
+            perspective: 1000px;
+            height: 400px;
+        }
+
+        .service-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+            cursor: pointer;
+        }
+
+        .service-card:hover .service-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .service-card-front,
+        .service-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 15px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .service-card-front {
+            background: linear-gradient(45deg, #6366f1, #8b5cf6);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 2rem;
+        }
+
+        .service-card-back {
+            background: white;
+            color: #1f2937;
+            transform: rotateY(180deg);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .icon-wrapper {
+            width: 80px;
+            height: 80px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .feature-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+
+        .hover-lift {
+            transition: transform 0.2s;
+        }
+
+        .hover-lift:hover {
+            transform: translateY(-5px);
+        }
+
+        /* FINAL HOVER EFFECT START */
+        .hover-container .hover-text {
+          top: 75%; /* Start hidden completely below the image */
+          transition: top 0.5s ease-in-out;
+        }
+
+        .hover-container:hover .hover-text {
+          top: 0;
+        }
+        /* FINAL HOVER EFFECT START */
+        
+</style>
+
+
+    <!-- Page Title -->
+    <div class="page-title" data-aos="fade">
+      <nav class="breadcrumbs">
+        <div class="container">
+          <ol>
+            <li><a href="/">Home</a></li>
+            <li class="current"><a href="/faqs-library/">Faqs & Library</a></li>
+          </ol>
+        </div>
+      </nav>
+    </div>
+    <!-- End Page Title -->
+
+    <!-- FAQs Section Start -->
+    <section class="container">
+      <h1 class="text-center fw-bolder text-primary fst-italic mb-3">Frequently Asked Questions?</h1>
+      <div class="accordion" id="accordionPanelsStayOpenExample">
+        <!-- Accordion Item-1 Start -->
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+              <h6>What are the primary options for foreign investors who want to set up business and legal presence in Qatar?</h6>
+            </button>
+          </h2>
+          <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse">
+            <div class="accordion-body">
+              <h6>Answer 1: This is the answer to the first question.</h6>
+            </div>
+          </div>
+        </div>
+        <!-- Accordion Item-1 End -->
+
+        <!-- Accordion Item-2 Start -->
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+              <h6>What is the corporate tax rate in Qatar?</h6>
+            </button>
+          </h2>
+          <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
+            <div class="accordion-body">
+              <h6>Answer 2: This is the answer to the second question.</h6>
+            </div>
+          </div>
+        </div>
+        <!-- Accordion Item-2 End -->
+
+        <!-- Accordion Item-3 Start -->
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseFour">
+              <h6>When should I register my business with General Tax Authority (GTA) Dhareeba portal?</h6>
+            </button>
+          </h2>
+          <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse">
+            <div class="accordion-body">
+              <h6>Answer 3: This is the answer to the third question.</h6>
+            </div>
+          </div>
+        </div>
+        <!-- Accordion Item-3 End -->
+
+        <!-- Accordion Item-4 Start -->
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="false" aria-controls="panelsStayOpen-collapseFour">
+              <h6>When should I file tax returns?</h6>
+            </button>
+          </h2>
+          <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse">
+            <div class="accordion-body">
+              <h6>Answer 4: This is the answer to the fourth question.</h6>
+            </div>
+          </div>
+        </div>
+        <!-- Accordion Item-4 End -->
+
+        <!-- Accordion Item-5 Start -->
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFive" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+              <h6>What if I fail to file tax returns?</h6>
+            </button>
+          </h2>
+          <div id="panelsStayOpen-collapseFive" class="accordion-collapse collapse">
+            <div class="accordion-body">
+              <h6>Answer 5: This is the answer to the third question.</h6>
+            </div>
+          </div>
+        </div>
+        <!-- Accordion Item-5 End -->
+
+        <!-- Accordion Item-6 Start -->
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseSix" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+              <h6>When should I pay tax due?</h6>
+            </button>
+          </h2>
+          <div id="panelsStayOpen-collapseSix" class="accordion-collapse collapse">
+            <div class="accordion-body">
+              <h6>Answer 6: This is the answer to the sixth question.</h6>
+            </div>
+          </div>
+        </div>
+        <!-- Accordion Item-6 End -->
+
+        <!-- Accordion Item-7 Start -->
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseSeven" aria-expanded="false" aria-controls="panelsStayOpen-collapseSix">
+              <h6>What if I fail to pay the tax due?</h6>
+            </button>
+          </h2>
+          <div id="panelsStayOpen-collapseSeven" class="accordion-collapse collapse">
+            <div class="accordion-body">
+              <h6>Answer 7: This is the answer to the seventh question.</h6>
+            </div>
+          </div>
+        </div>
+        <!-- Accordion Item-7 End -->
+
+        <!-- Accordion Item-8 Start -->
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseEight" aria-expanded="false" aria-controls="panelsStayOpen-collapseSeven">
+              <h6>Who are required to submit audited financial statements?</h6>
+            </button>
+          </h2>
+          <div id="panelsStayOpen-collapseEight" class="accordion-collapse collapse">
+            <div class="accordion-body">
+              <h6>Answer 8: This is the answer to the eighth question.</h6>
+            </div>
+          </div>
+        </div>
+        <!-- Accordion Item-8 End -->
+      </div>
+    </section>
+    <!-- FAQs Section End -->
+
+    <!-- Recommended Links Final Trial Start-->
+    <section class="container">
+      <h1 class="text-center fw-bolder text-primary fst-italic">Recommended Links</h1>
+      <div class="row g-4">
+        <!-- Service Card-1 Start -->
+        <div class="col-lg-4">
+          <div class="position-relative overflow-hidden hover-container shadow" style="max-width: 500px;">
+            <!-- Image -->
+            <a href=""><img src="{% static 'assets/img/services/service-1.jpg' %}" class="img-fluid w-100 d-block" alt="Sample Image"></a>
+            
+            <!-- Overlay Text Box -->
+            <div onclick="window.location.href='/ifrs';" style="cursor: pointer;" class="hover-text position-absolute bottom-0 start-0 end-0 bg-primary bg-opacity-50 text-white p-4">
+              <h4 class="mb-5 text-light">IFRS Updates</h4>
+              <p class="mb-0">Content .................</p>
+              <!-- <p class="mb-0">This text slides up smoothly from down to up when you hover over the image.</p> -->
+            </div>
+          </div>
+        </div>
+        <!-- Service Card-1 End -->
+
+        <!-- Service Card-2 Start -->
+        <div class="col-lg-4">
+          <div class="position-relative overflow-hidden hover-container shadow" style="max-width: 500px;">
+            <!-- Image -->
+            <a href=""><img src="{% static 'assets/img/services/service-2.jpg' %}" class="img-fluid w-100 d-block" alt="Sample Image"></a>
+            
+            <!-- Overlay Text Box -->
+            <div onclick="window.location.href='/taxnewletters';" style="cursor: pointer;" class="hover-text position-absolute bottom-0 start-0 end-0 bg-primary bg-opacity-50 text-white p-4">
+              <h4 class="mb-5 text-light">Tax Newsletters</h4>
+              <p class="mb-0">Content .................</p>
+              <!-- <p class="mb-0">Content .................</p> -->
+            </div>
+          </div>
+        </div>
+        <!-- Service Card-2 End -->
+
+        <!-- Service Card-3 Start -->
+        <div class="col-lg-4">
+          <div class="position-relative overflow-hidden hover-container shadow" style="max-width: 500px;">
+            <!-- Image -->
+            <a href=""><img src="{% static 'assets/img/services/service-3.jpg' %}" class="img-fluid w-100 d-block" alt="Sample Image"></a>
+            
+            <!-- Overlay Text Box -->
+            <div onclick="window.location.href='/qatarlaws';" style="cursor: pointer;" class="hover-text position-absolute bottom-0 start-0 end-0 bg-primary bg-opacity-50 text-white p-4">
+              <h4 class="mb-5 text-light">Qatar Laws</h4>
+              <p class="mb-0">Content .................</p>
+              <!-- <p class="mb-0">Content .................</p> -->
+            </div>
+          </div>
+        </div>
+        <!-- Service Card-3 End -->
+
+      </div>
+    </section>
+    <!-- Recommended Links Final Trial End-->
+
+
+{% endblock content %}

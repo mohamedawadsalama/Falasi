@@ -1,0 +1,105 @@
+{% extends "master.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block title %}
+    Alfalasi - Contact
+{% endblock title %}
+
+
+{% block content %}
+    
+    <!-- Page Title -->
+    <div class="page-title" data-aos="fade">
+      <nav class="breadcrumbs">
+        <div class="container">
+          <ol>
+            <li><a href="/">Home</a></li>
+            <li class="current"><a href="/contact/">Contact Us</a></li>
+          </ol>
+        </div>
+      </nav>
+    </div>
+    <!-- End Page Title -->
+
+
+    <!-- Contact Section Start -->
+    <section id="contact" class="contact section">
+      <!-- Section Title Start -->
+      <div class="text-center">
+          <h2>Contact Us</h2>
+          <p>Embedded in our culture of hard work, honesty, and getting the well done job.</p>
+      </div>
+      <!-- Section Title Start -->
+
+      <!-- Google Maps Start-->
+      <div class="container" data-aos="fade-up" data-aos-delay="200">
+        <iframe style="border:0; width: 100%; height: 270px;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d230886.62907395157!2d51.347185399172275!3d25.283917557733783!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e45c534ffdce87f%3A0x44d9319f78cfd4b1!2sDoha%2C%20Qatar!5e0!3m2!1sen!2seg!4v1753904479760!5m2!1sen!2seg" frameborder="0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+      <!-- Google Maps End-->
+
+      <!-- Contact Details & Contact Form Start-->
+      <div class="container">
+        <div class="row">
+          <!-- Col-1 Start -->
+          <div class="col-lg-3">
+            <div class="d-flex flex-column gap-5 border p-2 rounded-3 shadow-lg">
+              <!-- Contact Item Start -->
+              <div class="col">
+                <div class="info-item d-flex flex-column justify-content-center align-items-center">
+                  <i class="bi bi-geo-alt"></i>
+                  <h3>Address</h3>
+                  <p class="text-center">Zone 71, street 550, building 593, second floor, office number 7, Doha, Qatar 535022</p>
+                </div>
+              </div>
+              <!-- Contact Item End -->
+
+              <!-- Contact Item Start -->
+              <div class="col">
+                <div class="info-item d-flex flex-column justify-content-center align-items-center">
+                  <i class="bi bi-telephone"></i>
+                  <h3>Call Us</h3>
+                  <p>(+974) 66693950</p>
+                </div>
+              </div>
+              <!-- Contact Item End -->
+
+              <!-- Contact Item Start -->
+              <div class="col">
+                <div class="info-item d-flex flex-column justify-content-center align-items-center">
+                  <i class="bi bi-envelope"></i>
+                  <h3>Email Us</h3>
+                  <p>aftab@alfalasiaccounting.com</p>
+                </div>
+              </div>
+              <!-- Contact Item End -->
+
+            </div>
+          </div>
+          <!-- Col-1 End -->
+
+          <!-- Col-2 Start -->
+          <div class="col-lg-9">
+            <div class="border p-4 rounded-3 shadow-lg">
+              <form method="post" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  {{ form|crispy }}
+                  <div class="d-grid gap-2 col-6 mx-auto mt-lg-3">
+                      <button type="submit" class="btn btn-lg btn-primary" type="button">Send</button>
+                  </div>
+              </form>
+            </div>
+          </div>
+          <!-- Col-2 End -->
+        </div>
+
+      </div>
+      <!-- Contact Details & Contact Form End-->
+
+    </section>
+    <!-- Contact Section End -->
+
+    
+
+{% endblock content %}

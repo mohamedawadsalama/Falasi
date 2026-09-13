@@ -1,0 +1,54 @@
+{% extends "master.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block title %}
+    Alfalasi - Careers
+{% endblock title %}
+
+
+{% block content %}
+    
+    <!-- Page Title Start -->
+    <div class="page-title" data-aos="fade">
+      <nav class="breadcrumbs">
+        <div class="container">
+          <ol>
+            <li><a href="/">Home</a></li>
+            <li class="current"><a href="/careers/">Careers</a></li>
+          </ol>
+        </div>
+      </nav>
+    </div>
+    <!-- Page Title End -->
+
+
+    <!-- Career Form Start -->
+    <div class="container mt-5 mb-5">
+        <div class="text-center">
+          <h2>Welcome to AMF Career Form</h2>
+            <p>We got great opportunities for you to take your career on the next level! Join our team.</p>
+        </div>
+        <div class="border p-4 rounded shadow-lg">
+          <form method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+              {{ form|crispy }}
+              {% if messages %}
+                  <ul class="messages">
+                      {% for message in messages %}
+                          <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                      {% endfor %}
+                  </ul>
+              {% endif %}
+              
+              <div class="d-grid gap-2 col-6 mx-auto">
+                <button type="submit" class="btn btn-lg btn-primary" type="button">Submit</button>
+              </div>
+          </form>
+        </div>
+    </div>
+    <!-- Career Form End -->
+
+
+{% endblock content %}

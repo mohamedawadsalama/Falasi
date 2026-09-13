@@ -1,0 +1,44 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-25 02:02+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
+#: .\accounting\settings.py:124
+msgid "English"
+msgstr "English"
+
+#: .\accounting\settings.py:125
+msgid "Arabic"
+msgstr "عربي"
+
+#: .\accounting\settings.py:126
+msgid "French"
+msgstr "french"
+
+#: .\templates\master.html:73
+msgid "Alfalasi"
+msgstr "الفلسي"
+
+#: .\templates\master.html:146
+msgid "Welcome to my website"
+msgstr "مرحبا بك في الموقع"
+
+#: .\templates\master.html:147
+msgid "This page is translated."
+msgstr ""

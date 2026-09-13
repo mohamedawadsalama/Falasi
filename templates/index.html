@@ -1,0 +1,907 @@
+{% extends "master.html" %}
+{% load static %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    Alfalasi
+{% endblock title %}
+
+
+
+{% block content %}
+
+<style>
+    .service-card {
+            perspective: 1000px;
+            height: 400px;
+        }
+
+        .service-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+            cursor: pointer;
+        }
+
+        .service-card:hover .service-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .service-card-front,
+        .service-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 15px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .service-card-front {
+            background: linear-gradient(45deg, #6366f1, #8b5cf6);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 2rem;
+        }
+
+        .service-card-back {
+            background: white;
+            color: #1f2937;
+            transform: rotateY(180deg);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .icon-wrapper {
+            width: 80px;
+            height: 80px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .feature-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+
+        .hover-lift {
+            transition: transform 0.2s;
+        }
+
+        .hover-lift:hover {
+            transform: translateY(-5px);
+        }
+
+        /* FINAL HOVER EFFECT START */
+        .hover-container .hover-text {
+          top: 75%; /* Start hidden completely below the image */
+          transition: top 0.5s ease-in-out;
+        }
+
+        .hover-container:hover .hover-text {
+          top: 0;
+        }
+        /* FINAL HOVER EFFECT START */
+        
+</style>
+
+<main class="main">
+
+    <!-- Carousel Final Start -->
+    <div id="carouselExampleAutoplaying" class="carousel slide container-fluid" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active bg-dark">
+          <img src="{% static 'assets/img/hero-carousel/hero-carousel-1.jpg' %}" class="d-block w-100 opacity-50" style="max-height: 800px;" alt="...">
+          <div class="carousel-caption d-flex flex-column align-items-center justify-content-center top-0 bottom-0">
+            <h1 class="fw-bolder text-white">Welcome to Falasi<br></h1>
+            <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p> -->
+            <!--<a href="#featured-services" class="btn-get-started">Get Started</a>-->
+          </div>
+        </div>
+        <div class="carousel-item bg-dark">
+          <img src="{% static 'assets/img/hero-carousel/hero-carousel-2.jpg' %}" class="d-block w-100 opacity-50" style="max-height: 800px;" alt="...">
+          <div class="carousel-caption d-flex flex-column align-items-center justify-content-center top-0 bottom-0">
+            <h1 class="fw-bolder text-white">Welcome to Falasi<br></h1>
+            <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p> -->
+            <!--<a href="#featured-services" class="btn-get-started">Get Started</a>-->
+          </div>
+        </div>
+        <div class="carousel-item bg-dark">
+          <img src="{% static 'assets/img/hero-carousel/hero-carousel-3.jpg' %}" class="d-block w-100 opacity-50" style="max-height: 800px;" alt="...">
+          <div class="carousel-caption d-flex flex-column align-items-center justify-content-center top-0 bottom-0">
+            <h1 class="fw-bolder text-white">Welcome to Falasi<br></h1>
+            <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p> -->
+            <!--<a href="#featured-services" class="btn-get-started">Get Started</a>-->
+          </div>
+        </div>
+        <div class="carousel-item bg-dark">
+          <img src="{% static 'assets/img/hero-carousel/blog-1.jpg' %}" class="d-block w-100 opacity-50" style="max-height: 800px;" alt="...">
+          <div class="carousel-caption d-flex flex-column align-items-center justify-content-center top-0 bottom-0">
+            <h1 class="fw-bolder text-white">Welcome to Falasi<br></h1>
+            <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p> -->
+            <!--<a href="#featured-services" class="btn-get-started">Get Started</a>-->
+          </div>
+        </div>
+        <div class="carousel-item bg-dark">
+          <img src="{% static 'assets/img/hero-carousel/blog-2.jpg' %}" class="d-block w-100 opacity-50" style="max-height: 800px;" alt="...">
+          <div class="carousel-caption d-flex flex-column align-items-center justify-content-center top-0 bottom-0">
+            <h1 class="fw-bolder text-white">Welcome to Falasi<br></h1>
+            <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p> -->
+            <!--<a href="#featured-services" class="btn-get-started">Get Started</a>-->
+          </div>
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>  
+    <!-- Carousel Final End -->
+
+    <!-- Who We Are Section Start-->
+    <section id="about" class="about section">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h1 class="text-center fw-bolder text-primary fst-italic">Who We Are</h1>
+        <!-- <p>Abdulla bin Mohamed Al falasi</p> -->
+      </div>
+      <!-- End Section Title -->
+
+      <div class="container">
+
+        <div class="row gy-4">
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+            <h3>Abdulla bin Mohamed Al falasi</h3>
+            <p>
+              A newly set up audit and accounting firm which provides a wide range of high-Quality financial services 
+              ( Audit, accounting, tax, consulting and business advisory) by a group of dedicated young talented 
+              professionals who delivers the best valuable clients in timely and cost-effective manner, 
+              The team has been working together for more than 10 years and has now formed AMF.
+            </p>
+            <div class="content ps-0 ps-lg-5">
+              <ul>
+                <li><i class="bi bi-check-circle-fill"></i> <span>We are an existing team working under a new name.</span></li>
+                <li><i class="bi bi-check-circle-fill"></i> <span>Our strength is our team spirit, experience and co- existence.</span></li>
+                <li><i class="bi bi-check-circle-fill"></i> <span>We develop a smart and highly professional way of doing things.</span></li>
+                <li><i class="bi bi-check-circle-fill"></i> <span>We are flexible, we adapt quickly to client needs and deliver on time high quality deliverables.</span></li>
+                <li><i class="bi bi-check-circle-fill"></i> <span>We help you applying and implementing new and revised IFRSs.</span></li>
+                <li><i class="bi bi-check-circle-fill"></i> <span>We use latest software and technologies which help to generate full IFRS compliant financial statements and Group consolidated FS.</span></li>
+                <li><i class="bi bi-check-circle-fill"></i> <span>We are up to date with tax and other regulatory changes or amends.</span></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="250">
+            <div class="content ps-0 ps-lg-5">
+              <div class="position-relative mt-4">
+                <img src="{% static 'assets/img/about-2.jpg' %}" class="img-fluid rounded-4" alt="">
+                <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="glightbox pulsating-play-btn"></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+    <!-- Who We Are Section End-->
+
+    <!-- Quick Links Final Trial Start-->
+    <section class="container">
+      <h1 class="text-center fw-bolder text-primary fst-italic">Quick Links</h1>
+      <div class="row g-4">
+        <!-- Service Card-1 Start -->
+        <div class="col-lg-4">
+          <div class="position-relative overflow-hidden hover-container shadow" style="max-width: 500px;">
+            <!-- Image -->
+            <a href=""><img src="{% static 'assets/img/services/service-1.jpg' %}" class="img-fluid w-100 d-block" alt="Sample Image"></a>
+            
+            <!-- Overlay Text Box -->
+            <div onclick="window.location.href='/ifrs';" style="cursor: pointer;" class="hover-text position-absolute bottom-0 start-0 end-0 bg-primary bg-opacity-50 text-white p-4">
+              <h4 class="mb-5 text-light">IFRS Updates</h4>
+              <p class="mb-0">Content .................</p>
+              <!-- <p class="mb-0">This text slides up smoothly from down to up when you hover over the image.</p> -->
+            </div>
+          </div>
+        </div>
+        <!-- Service Card-1 End -->
+
+        <!-- Service Card-2 Start -->
+        <div class="col-lg-4">
+          <div class="position-relative overflow-hidden hover-container shadow" style="max-width: 500px;">
+            <!-- Image -->
+            <a href=""><img src="{% static 'assets/img/services/service-2.jpg' %}" class="img-fluid w-100 d-block" alt="Sample Image"></a>
+            
+            <!-- Overlay Text Box -->
+            <div onclick="window.location.href='/taxnewletters';" style="cursor: pointer;" class="hover-text position-absolute bottom-0 start-0 end-0 bg-primary bg-opacity-50 text-white p-4">
+              <h4 class="mb-5 text-light">Tax Newsletters</h4>
+              <p class="mb-0">Content .................</p>
+              <!-- <p class="mb-0">Content .................</p> -->
+            </div>
+          </div>
+        </div>
+        <!-- Service Card-2 End -->
+
+        <!-- Service Card-3 Start -->
+        <div class="col-lg-4">
+          <div class="position-relative overflow-hidden hover-container shadow" style="max-width: 500px;">
+            <!-- Image -->
+            <a href=""><img src="{% static 'assets/img/services/service-3.jpg' %}" class="img-fluid w-100 d-block" alt="Sample Image"></a>
+            
+            <!-- Overlay Text Box -->
+            <div onclick="window.location.href='/qatarlaws';" style="cursor: pointer;" class="hover-text position-absolute bottom-0 start-0 end-0 bg-primary bg-opacity-50 text-white p-4">
+              <h4 class="mb-5 text-light">Qatar Laws</h4>
+              <p class="mb-0">Content .................</p>
+              <!-- <p class="mb-0">Content .................</p> -->
+            </div>
+          </div>
+        </div>
+        <!-- Service Card-3 End -->
+
+      </div>
+    </section>
+    <!-- Quick Links Final Trial End-->
+  
+    <!-- About Us Section Start-->
+    <section id="about" class="about section">
+
+      <!-- Section Title Start -->
+      <div class="container section-title" data-aos="fade-up">
+        <h1 class="text-center fw-bolder text-primary fst-italic">About Us</h1>
+        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+      </div>
+      <!-- Section Title End -->
+
+      <div class="container">
+
+        <div class="row gy-4">
+
+          <!-- row-1 Start-->
+          <!-- Col-1 Start -->
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="content ps-0 ps-lg-5">
+              <p class="fst-italic">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+                magna aliqua.
+              </p>
+              <ul>
+                <li><i class="bi bi-check-circle-fill"></i> <span>We are an existing team working under a new name.</span></li>
+                <li><i class="bi bi-check-circle-fill"></i> <span>Our strength is our team spirit, experience and co- existence.</span></li>
+                <li><i class="bi bi-check-circle-fill"></i> <span>We develop a smart and highly professional way of doing things.</span></li>
+                <li><i class="bi bi-check-circle-fill"></i> <span>We are flexible, we adapt quickly to client needs and deliver on time high quality deliverables.</span></li>
+                <li><i class="bi bi-check-circle-fill"></i> <span>We help you applying and implementing new and revised IFRSs.</span></li>
+                <li><i class="bi bi-check-circle-fill"></i> <span>We use latest software and technologies which help to generate full IFRS compliant financial statements and Group consolidated FS.</span></li>
+                <li><i class="bi bi-check-circle-fill"></i> <span>We are up to date with tax and other regulatory changes or amends.</span></li>
+              </ul>
+              <p>Ut fugiat ut sunt quia veniam. Voluptate perferendis perspiciatis quod nisi et. Placeat debitis quia recusandae odit et consequatur voluptatem. Dignissimos pariatur consectetur fugiat voluptas ea.</p>
+              <p>Temporibus nihil enim deserunt sed ea. Provident sit expedita aut cupiditate nihil vitae quo officia vel. Blanditiis eligendi possimus et in cum. Quidem eos ut sint rem veniam qui. Ut ut repellendus nobis tempore doloribus debitis explicabo similique sit. Accusantium sed ut omnis beatae neque deleniti repellendus.</p>
+              <p>
+                Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+                velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident
+              </p>
+            </div>
+          </div>
+          <!-- Col-1 End -->
+
+          <!-- Col-2 Start -->
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="250">
+            <div class="content ps-0 ps-lg-5">
+              
+
+              <div class="position-relative mt-4">
+                <img src="{% static 'assets/img/about.jpg' %}" class="img-fluid rounded-4 mb-4" alt="">
+              </div>
+            </div>
+          </div>
+          <!-- Col-2 End -->
+          <!-- row-1 End-->
+
+          <!-- row-2 Start-->
+          <!-- Col-1 Start -->
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+            <img src="{% static 'assets/img/about-2.jpg' %}" class="img-fluid rounded-4 mb-4" alt="">
+          </div>
+          <!-- Col-1 End -->
+
+          <!-- Col-2 Start -->
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="250">
+            <div class="content ps-0 ps-lg-5">
+              <p class="fst-italic">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+                magna aliqua.
+              </p>
+              <ul>
+                <li><i class="bi bi-check-circle-fill"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo consequat.</span></li>
+                <li><i class="bi bi-check-circle-fill"></i> <span>Duis aute irure dolor in reprehenderit in voluptate velit.</span></li>
+                <li><i class="bi bi-check-circle-fill"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</span></li>
+              </ul>
+              <p>Ut fugiat ut sunt quia veniam. Voluptate perferendis perspiciatis quod nisi et. Placeat debitis quia recusandae odit et consequatur voluptatem. Dignissimos pariatur consectetur fugiat voluptas ea.</p>
+              <p>Temporibus nihil enim deserunt sed ea. Provident sit expedita aut cupiditate nihil vitae quo officia vel. Blanditiis eligendi possimus et in cum. Quidem eos ut sint rem veniam qui. Ut ut repellendus nobis tempore doloribus debitis explicabo similique sit. Accusantium sed ut omnis beatae neque deleniti repellendus.</p>
+              <p>
+                Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+                velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident
+              </p>
+            </div>
+          </div>
+          <!-- Col-2 End -->
+          <!-- row-2 End-->
+
+        </div>
+
+      </div>
+
+    </section>
+    <!-- About Us Section End-->   
+
+    <!-- Compnay Profile Section Start -->
+    <section class="container-fluid">
+      <div class="card text-center bg-primary p-5">  
+        <div class="card-body">
+          <h3 class="card-title text-light">Audit, Tax and Financial Advisory Consultants in Qatar</h3>
+          <p class="card-text text-light">
+            Our professional advisory team help clients overcome their concerns and issues by providing 
+            expert advice, and reliable and practical solutions. As one of the best market research companies 
+            in Qatar, we will assist you in defining project initiatives, recognizing growth opportunities, 
+            and executing transformational business endeavors.
+          </p>
+          <a href="{% static 'assets/documents/Action Plan.pdf' %}" class="btn btn-lg btn-outline-light" download>Download Company Profile</a>
+        </div>
+        
+      </div>
+    </section>
+    <!-- Compnay Profile Section End -->
+
+    <!-- Services Final Trial Start-->
+    <section class="container">
+      <h1 class="text-center fw-bolder text-primary fst-italic">Our Services</h1>
+      
+      <div class="row g-4">
+        <!-- Services row-1 Start -->
+
+        <!-- Service Card-1 Start -->
+        <div class="col-lg-4">
+          <div class="position-relative overflow-hidden hover-container shadow" style="max-width: 500px;">
+            <!-- Image -->
+            <a href=""><img src="{% static 'assets/img/services/service-1.jpg' %}" class="img-fluid w-100 d-block" alt="Sample Image"></a>
+            
+            <!-- Overlay Text Box -->
+            <div onclick="window.location.href='/services/financial-services';" style="cursor: pointer;" class="hover-text position-absolute bottom-0 start-0 end-0 bg-primary bg-opacity-50 text-white p-4">
+              <h4 class="mb-5 text-light">Financial Services</h4>
+              <p class="mb-0">Content ....................</p>
+              <!-- <p class="mb-0">This text slides up smoothly from down to up when you hover over the image.</p> -->
+            </div>
+          </div>
+        </div>
+        <!-- Service Card-1 End -->
+
+        <!-- Service Card-2 Start -->
+        <div class="col-lg-4">
+          <div class="position-relative overflow-hidden hover-container shadow" style="max-width: 500px;">
+            <!-- Image -->
+            <a href=""><img src="{% static 'assets/img/services/service-2.jpg' %}" class="img-fluid w-100 d-block" alt="Sample Image"></a>
+            
+            <!-- Overlay Text Box -->
+            <div onclick="window.location.href='/services/advisory-services';" style="cursor: pointer;" class="hover-text position-absolute bottom-0 start-0 end-0 bg-primary bg-opacity-50 text-white p-4">
+              <h4 class="mb-5 text-light">Advisory Services</h4>
+              <p class="mb-0">Content ....................</p>
+              <!-- <p class="mb-0">This text slides up smoothly from down to up when you hover over the image.</p> -->
+            </div>
+          </div>
+        </div>
+        <!-- Service Card-2 End -->
+
+        <!-- Service Card-3 Start -->
+        <div class="col-lg-4">
+          <div class="position-relative overflow-hidden hover-container shadow" style="max-width: 500px;">
+            <!-- Image -->
+            <a href=""><img src="{% static 'assets/img/services/service-3.jpg' %}" class="img-fluid w-100 d-block" alt="Sample Image"></a>
+            
+            <!-- Overlay Text Box -->
+            <div onclick="window.location.href='/services/transaction-services';" style="cursor: pointer;" class="hover-text position-absolute bottom-0 start-0 end-0 bg-primary bg-opacity-50 text-white p-4">
+              <h4 class="mb-5 text-light">Transaction Services</h4>
+              <p class="mb-0">Content ....................</p>
+              <!-- <p class="mb-0">This text slides up smoothly from down to up when you hover over the image.</p> -->
+            </div>
+          </div>
+        </div>
+        <!-- Service Card-3 End -->
+
+        <!-- Services row-1 End -->
+
+        <!-- Services row-2 Start -->
+
+        <!-- Service Card-4 Start -->
+        <div class="col-lg-4">
+          <div class="position-relative overflow-hidden hover-container shadow" style="max-width: 500px;">
+            <!-- Image -->
+            <a href=""><img src="{% static 'assets/img/services/service-4.jpg' %}" class="img-fluid w-100 d-block" alt="Sample Image"></a>
+            
+            <!-- Overlay Text Box -->
+            <div onclick="window.location.href='/services/taxation-services';" style="cursor: pointer;" class="hover-text position-absolute bottom-0 start-0 end-0 bg-primary bg-opacity-50 text-white p-4">
+              <h4 class="mb-5 text-light">Taxation Services</h4>
+              <p class="mb-0">Content..................</p>
+              <!-- <p class="mb-0">This text slides up smoothly from down to up when you hover over the image.</p>-->
+            </div>
+          </div>
+        </div>
+        <!-- Service Card-4 End -->
+
+        <!-- Service Card-5 Start -->
+        <div class="col-lg-4">
+          <div class="position-relative overflow-hidden hover-container shadow" style="max-width: 500px;">
+            <!-- Image -->
+            <a href=""><img src="{% static 'assets/img/services/service-5.jpg' %}" class="img-fluid w-100 d-block" alt="Sample Image"></a>
+            
+            <!-- Overlay Text Box -->
+            <div onclick="window.location.href='/services/liquidation-services';" style="cursor: pointer;" class="hover-text position-absolute bottom-0 start-0 end-0 bg-primary bg-opacity-50 text-white p-4">
+              <h4 class="mb-5 text-light">Liquidation Services</h4>
+              <p class="mb-0">Content..................</p>
+              <!-- <p class="mb-0">This text slides up smoothly from down to up when you hover over the image.</p> -->
+            </div>
+          </div>
+        </div>
+        <!-- Service Card-5 End -->
+
+        <!-- Service Card-6 Start -->
+        <div class="col-lg-4">
+          <div class="position-relative overflow-hidden hover-container shadow" style="max-width: 500px;">
+            <!-- Image -->
+            <a href=""><img src="{% static 'assets/img/services/service-6.jpg' %}" class="img-fluid w-100 d-block" alt="Sample Image"></a>
+            
+            <!-- Overlay Text Box -->
+            <div onclick="window.location.href='/';" style="cursor: pointer;" class="hover-text position-absolute bottom-0 start-0 end-0 bg-primary bg-opacity-50 text-white p-4">
+              <h4 class="mb-5 text-light">Service Title</h4>
+              <p class="mb-0">Content..................</p>
+              <!-- <p class="mb-0">This text slides up smoothly from down to up when you hover over the image.</p> -->
+            </div>
+          </div>
+        </div>
+        <!-- Service Card-6 End -->
+        <!-- Services row-2 End -->
+      </div>
+    </section>
+    <!-- Services Final Trial End-->
+
+    <!-- Stats Section Start -->
+    <section id="stats" class="stats section light-background">
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-3 col-md-6 d-flex flex-column align-items-center">
+            <i class="bi bi-emoji-smile"></i>
+            <div class="stats-item">
+              <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="1" class="purecounter"></span>
+              <p>Satisfied Clients</p>
+            </div>
+          </div><!-- End Stats Item -->
+
+          <div class="col-lg-3 col-md-6 d-flex flex-column align-items-center">
+            <i class="bi bi-journal-richtext"></i>
+            <div class="stats-item">
+              <span data-purecounter-start="0" data-purecounter-end="521" data-purecounter-duration="1" class="purecounter"></span>
+              <p>Projects</p>
+            </div>
+          </div><!-- End Stats Item -->
+
+          <div class="col-lg-3 col-md-6 d-flex flex-column align-items-center">
+            <i class="bi bi-headset"></i>
+            <div class="stats-item">
+              <span data-purecounter-start="0" data-purecounter-end="1463" data-purecounter-duration="1" class="purecounter"></span>
+              <p>Hours Of Support</p>
+            </div>
+          </div><!-- End Stats Item -->
+
+          <div class="col-lg-3 col-md-6 d-flex flex-column align-items-center">
+            <i class="bi bi-people"></i>
+            <div class="stats-item">
+              <span data-purecounter-start="0" data-purecounter-end="15" data-purecounter-duration="1" class="purecounter"></span>
+              <p>Hard Workers</p>
+            </div>
+          </div><!-- End Stats Item -->
+
+        </div>
+
+      </div>
+
+    </section>
+    <!-- Stats Section End -->
+
+    <!-- Support Services Section Start -->
+    <section id="services" class="services section">
+
+      <!-- Section Title Start -->
+      <div class="container section-title" data-aos="fade-up">
+        <h1 class="text-center fw-bolder text-primary fst-italic">Support Services</h1>
+        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+      </div>
+      <!-- Section Title End -->
+
+      <div class="container">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="service-item  position-relative">
+              <div class="icon">
+                <i class="bi bi-activity"></i>
+              </div>
+              <a href="service-details.html" class="stretched-link">
+                <h3>Support service 1</h3>
+              </a>
+              <p>Provident nihil minus qui consequatur non omnis maiores. Eos accusantium minus dolores iure perferendis tempore et consequatur.</p>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="service-item position-relative">
+              <div class="icon">
+                <i class="bi bi-broadcast"></i>
+              </div>
+              <a href="service-details.html" class="stretched-link">
+                <h3>Support service 2</h3>
+              </a>
+              <p>Ut autem aut autem non a. Sint sint sit facilis nam iusto sint. Libero corrupti neque eum hic non ut nesciunt dolorem.</p>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="service-item position-relative">
+              <div class="icon">
+                <i class="bi bi-easel"></i>
+              </div>
+              <a href="service-details.html" class="stretched-link">
+                <h3>Support service 3</h3>
+              </a>
+              <p>Ut excepturi voluptatem nisi sed. Quidem fuga consequatur. Minus ea aut. Vel qui id voluptas adipisci eos earum corrupti.</p>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+            <div class="service-item position-relative">
+              <div class="icon">
+                <i class="bi bi-bounding-box-circles"></i>
+              </div>
+              <a href="service-details.html" class="stretched-link">
+                <h3>Support service 4</h3>
+              </a>
+              <p>Non et temporibus minus omnis sed dolor esse consequatur. Cupiditate sed error ea fuga sit provident adipisci neque.</p>
+              <a href="service-details.html" class="stretched-link"></a>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+            <div class="service-item position-relative">
+              <div class="icon">
+                <i class="bi bi-calendar4-week"></i>
+              </div>
+              <a href="service-details.html" class="stretched-link">
+                <h3>Support service 5</h3>
+              </a>
+              <p>Cumque et suscipit saepe. Est maiores autem enim facilis ut aut ipsam corporis aut. Sed animi at autem alias eius labore.</p>
+              <a href="service-details.html" class="stretched-link"></a>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
+            <div class="service-item position-relative">
+              <div class="icon">
+                <i class="bi bi-chat-square-text"></i>
+              </div>
+              <a href="service-details.html" class="stretched-link">
+                <h3>Support service 6</h3>
+              </a>
+              <p>Hic molestias ea quibusdam eos. Fugiat enim doloremque aut neque non et debitis iure. Corrupti recusandae ducimus enim.</p>
+              <a href="service-details.html" class="stretched-link"></a>
+            </div>
+          </div><!-- End Service Item -->
+
+        </div>
+
+      </div>
+
+    </section>
+    <!-- Support Services Section End -->
+
+    <!-- Satisfied Clients Final Start -->
+    <section class="brand-marquee">
+
+      <!-- Section Title Start -->
+      <div class="container section-title" >
+        <h1 class="text-center fw-bolder text-primary fst-italic">Our Satisfied Clients</h1>
+        <!-- <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p> -->
+      </div>
+      <!-- Section Title End -->
+      
+      <br>
+      
+      <!-- Marquee Section Start-->
+      <div class="marquee">
+
+        <div class="marquee-track d-flex container justify-content-center align-items-center gap-5">
+
+            <div class="brand-item">
+              <a href="#">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a6/Logo_NIKE.svg" style="height:60px">
+              </a>
+            </div>
+
+            <div class="brand-item">
+              <a href="#">
+                <img src="https://1000marcas.net/wp-content/uploads/2024/02/Adidas-Logo.png" style="height:60px">
+              </a>
+            </div>
+
+            <div class="brand-item">
+              <a href="#">
+                <img src="https://1000marcas.net/wp-content/uploads/2019/12/logo-Puma.png" style="height:60px">
+              </a>
+            </div>
+
+            <div class="brand-item">
+              <a href="#">
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Reebok_2019_logo.svg/1280px-Reebok_2019_logo.svg.png" style="height:60px">
+              </a>
+            </div>
+
+            <div class="brand-item">
+              <a href="#">
+                <img src="https://www.freepnglogos.com/uploads/new-balance-png-logo/new-balance-logo-png-white-0.png" style="height:60px">
+              </a>
+            </div>
+
+            <div class="brand-item">
+              <a href="#">
+                <img src="https://1000logos.net/wp-content/uploads/2021/04/Under-Armour-logo.png" style="height:50px">
+              </a>
+            </div>
+
+            <div class="brand-item">
+              <a href="#">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a6/Logo_NIKE.svg" style="height:60px">
+              </a>
+            </div>
+
+            <div class="brand-item">
+              <a href="#">
+                <img src="https://1000marcas.net/wp-content/uploads/2024/02/Adidas-Logo.png" style="height:60px">
+              </a>
+            </div>
+
+            <div class="brand-item">
+              <a href="#">
+                <img src="https://1000marcas.net/wp-content/uploads/2019/12/logo-Puma.png" style="height:60px">
+              </a>
+            </div>
+
+            <div class="brand-item">
+              <a href="#">
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Reebok_2019_logo.svg/1280px-Reebok_2019_logo.svg.png" style="height:60px">
+              </a>
+            </div>
+
+            <div class="brand-item">
+              <a href="#">
+                <img src="https://www.freepnglogos.com/uploads/new-balance-png-logo/new-balance-logo-png-white-0.png" style="height:60px">
+              </a>
+            </div>
+
+            <div class="brand-item">
+              <a href="#">
+                <img src="https://1000logos.net/wp-content/uploads/2021/04/Under-Armour-logo.png" style="height:50px">
+              </a>
+            </div>
+
+        </div>
+      </div>
+      <!-- Marquee Section End-->
+      
+    </section>
+    <!-- Satisfied Clients Final End-->
+
+    <!-- Latest Projects Section Start -->
+    <section id="portfolio" class="portfolio section">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h1 class="text-center fw-bolder text-primary fst-italic">Latest Projects</h1>
+        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+      </div><!-- End Section Title -->
+
+      <div class="container">
+
+        <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
+
+          <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
+            <li data-filter="*" class="filter-active">All</li>
+            <li data-filter=".filter-app">Financial</li>
+            <li data-filter=".filter-product">Transaction</li>
+            <li data-filter=".filter-branding">Liquidation</li>
+          </ul><!-- End Portfolio Filters -->
+
+          <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
+
+            <!-- Portfolio Item Start -->
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
+              <img src="{% static 'assets/img/masonry-portfolio/masonry-portfolio-1.jpg' %}" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>Project </h4>
+                <p>Lorem ipsum, dolor sit</p>
+                <a href="{% static 'assets/img/masonry-portfolio/masonry-portfolio-1.jpg' %}" title="Project 1" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div>
+            <!-- Portfolio Item End -->
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
+              <img src="{% static 'assets/img/masonry-portfolio/masonry-portfolio-2.jpg' %}" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>Project </h4>
+                <p>Lorem ipsum, dolor sit</p>
+                <a href="{% static 'assets/img/masonry-portfolio/masonry-portfolio-2.jpg' %}" title="Project" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
+              <img src="{% static 'assets/img/masonry-portfolio/masonry-portfolio-3.jpg' %}" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>Project</h4>
+                <p>Lorem ipsum, dolor sit</p>
+                <a href="{% static 'assets/img/masonry-portfolio/masonry-portfolio-3.jpg' %}" title="Branding 1" data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
+              <img src="{% static 'assets/img/masonry-portfolio/masonry-portfolio-4.jpg' %}" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>Project </h4>
+                <p>Lorem ipsum, dolor sit</p>
+                <a href="{% static 'assets/img/masonry-portfolio/masonry-portfolio-4.jpg' %}" title="App 2" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
+              <img src="{% static 'assets/img/masonry-portfolio/masonry-portfolio-5.jpg' %}" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>Project </h4>
+                <p>Lorem ipsum, dolor sit</p>
+                <a href="{% static 'assets/img/masonry-portfolio/masonry-portfolio-5.jpg' %}" title="Product 2" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
+              <img src="{% static 'assets/img/masonry-portfolio/masonry-portfolio-6.jpg' %}" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>Project </h4>
+                <p>Lorem ipsum, dolor sit</p>
+                <a href="{% static 'assets/img/masonry-portfolio/masonry-portfolio-6.jpg' %}" title="Branding 2" data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
+              <img src="{% static 'assets/img/masonry-portfolio/masonry-portfolio-7.jpg' %}" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>Project </h4>
+                <p>Lorem ipsum, dolor sit</p>
+                <a href="{% static 'assets/img/masonry-portfolio/masonry-portfolio-7.jpg' %}" title="App 3" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
+              <img src="{% static 'assets/img/masonry-portfolio/masonry-portfolio-4.jpg' %}" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>Project </h4>
+                <p>Lorem ipsum, dolor sit</p>
+                <a href="{% static 'assets/img/masonry-portfolio/masonry-portfolio-4.jpg' %}" title="Product 3" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
+              <img src="{% static 'assets/img/masonry-portfolio/masonry-portfolio-9.jpg' %}" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>Project</h4>
+                <p>Lorem ipsum, dolor sit</p>
+                <a href="{% static 'assets/img/masonry-portfolio/masonry-portfolio-9.jpg' %}" title="Branding 2" data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+          </div><!-- End Portfolio Container -->
+
+        </div>
+
+      </div>
+
+    </section>
+    <!-- Latest Projects Section End -->
+
+    <!-- Recent News Section Start -->
+    <section>
+      <!-- Section Title Start 
+      <div class="container" data-aos="fade-up">
+        <h1 class="text-center fw-bolder text-primary fst-italic">Quick Links</h1>
+      </div>
+       Section Title End -->
+
+      <!-- Latest News Start -->
+      <section id="why-us" class="why-us section">
+        <div class="container">
+          <h1 class="text-center fw-bolder text-primary fst-italic">Recent News</h1>
+          <div class="row gy-4">
+            <!-- Link-1 Start-->
+            <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+              <div class="card-item rounded-3" style="max-height: 400px; overflow: hidden;">
+                
+                <img src="{% static 'assets/img/services/service-1.jpg' %}" class="img-thumbnail" alt="">
+                <h4><a href="/ifrs/" class="stretched-link">IFRS Updates</a></h4>
+                
+              </div>
+            </div>
+            <!-- Link-1 End-->
+
+            <!-- Link-2 Start-->
+            <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+              <div class="card-item rounded-3" style="max-height: 400px; overflow: hidden;">
+                <img src="{% static 'assets/img/services/service-2.jpg' %}" class="img-thumbnail" alt="">
+                <h4><a href="/taxnewletters/" class="stretched-link">TAX Newsletters</a></h4>
+              </div>
+            </div>
+            <!-- Link-2 End-->
+
+            <!-- Link-3 Start-->
+            <div class="col-lg-4" data-aos="fade-up" data-aos-delay="300">
+              <div class="card-item rounded-3" style="max-height: 400px; overflow: hidden;">
+                <img src="{% static 'assets/img/services/service-3.jpg' %}" class="img-thumbnail" alt="">
+                <h4><a href="/qatarlaws/" class="stretched-link">Qatar Laws</a></h4>
+              </div>
+            </div>
+            <!-- Link-4 End -->
+          </div>
+        </div>
+      </section>
+      <!-- Quick Links End -->
+    </section>
+    <!-- Recent News Section End -->
+
+  </main>
+    
+{% endblock content %}
+    
+    
